@@ -33,6 +33,8 @@
             button2 = new Button();
             button1 = new Button();
             button3 = new Button();
+            button5 = new Button();
+            button6 = new Button();
             label1 = new Label();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -49,12 +51,15 @@
             tableLayoutPanel1.Controls.Add(button2, 2, 0);
             tableLayoutPanel1.Controls.Add(button1, 1, 0);
             tableLayoutPanel1.Controls.Add(button3, 1, 1);
-            tableLayoutPanel1.Controls.Add(label1, 0, 0);
+            tableLayoutPanel1.Controls.Add(button5, 2, 2);
+            tableLayoutPanel1.Controls.Add(button6, 1, 2);
+            tableLayoutPanel1.Controls.Add(label1, 0, 2);
             tableLayoutPanel1.Location = new Point(12, 12);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.Size = new Size(487, 150);
             tableLayoutPanel1.TabIndex = 0;
             // 
@@ -66,6 +71,7 @@
             button4.TabIndex = 4;
             button4.Text = "Down";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += buttonDown_Click;
             // 
             // button2
             // 
@@ -75,7 +81,7 @@
             button2.TabIndex = 2;
             button2.Text = "Down";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            button2.Click += buttonDown_Click;
             // 
             // button1
             // 
@@ -85,6 +91,7 @@
             button1.TabIndex = 1;
             button1.Text = "Up";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += buttonUp_Click;
             // 
             // button3
             // 
@@ -94,14 +101,35 @@
             button3.TabIndex = 3;
             button3.Text = "Up";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += buttonUp_Click;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(391, 83);
+            button5.Name = "button5";
+            button5.Size = new Size(93, 34);
+            button5.TabIndex = 7;
+            button5.Text = "Down";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += buttonDown_Click;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(291, 83);
+            button6.Name = "button6";
+            button6.Size = new Size(94, 34);
+            button6.TabIndex = 6;
+            button6.Text = "Up";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += buttonUp_Click;
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             label1.AutoSize = true;
-            label1.Location = new Point(126, 0);
+            label1.Location = new Point(126, 80);
             label1.Name = "label1";
-            label1.Size = new Size(36, 40);
+            label1.Size = new Size(36, 70);
             label1.TabIndex = 5;
             label1.Text = "Lift";
             // 
@@ -127,5 +155,7 @@
         private Button button3;
         private Button button4;
         private Label label1;
+        private Button button5;
+        private Button button6;
     }
 }
