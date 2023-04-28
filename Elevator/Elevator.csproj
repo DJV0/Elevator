@@ -12,4 +12,8 @@
     <None Remove="Form1.Designer.cs~RF1abf734.TMP" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Interfaces\" />
+  </ItemGroup>
+
 </Project>

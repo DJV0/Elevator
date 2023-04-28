@@ -1,34 +1,55 @@
+using Elevator.Models;
+using Elevator.Services;
+
 namespace Elevator
 {
     public partial class Form1 : Form
     {
-        int level;
-        int maxLevel;
+        private LiftService _liftService;
 
         public Form1()
         {
             InitializeComponent();
-            maxLevel = tableLayoutPanel1.RowCount;
-            level = 1;
+            var lift = new Lift(tableLayoutPanel1.RowCount, 4);
+            _liftService = new LiftService(lift);
+            _liftService.OnAddTicketHandler += MoveLift;
         }
 
-        private void buttonDown_Click(object sender, EventArgs e)
+        private async void buttonDown_Click(object sender, EventArgs e)
         {
-            if (level > 1)
-            {
-                tableLayoutPanel1.Controls.Remove(label1);
-                level--;
-                tableLayoutPanel1.Controls.Add(label1, 0, Math.Abs(level - maxLevel));
-            }
+            var callLevel = tableLayoutPanel1.GetRow((Button)sender);
+
+            await _liftService.AddTicketAsync(callLevel);
         }
 
-        private void buttonUp_Click(object sender, EventArgs e)
+        private async void buttonUp_Click(object sender, EventArgs e)
         {
-            if (level < maxLevel)
+            var callLevel = tableLayoutPanel1.GetRow((Button)sender);
+
+            await _liftService.AddTicketAsync(callLevel);
+        }
+
+        private void MoveLift(object sender, EventArgs e)
+        {
+            int callLevel = ((TicketEventArgs)e).CallLevel;
+            var liftLevel = tableLayoutPanel1.GetRow(label1);
+
+            if (callLevel < liftLevel)
+                ShiftControlVerticaly(liftLevel, callLevel, true);
+            else
+                ShiftControlVerticaly(liftLevel, callLevel);
+        }
+
+        private void ShiftControlVerticaly(int startRow, int finishRow, bool shiftUp = false)
+        {
+            while (startRow != finishRow)
             {
                 tableLayoutPanel1.Controls.Remove(label1);
-                level++;
-                tableLayoutPanel1.Controls.Add(label1, 0, Math.Abs(level - maxLevel));
+                startRow = shiftUp ? startRow - 1 : startRow + 1;
+                tableLayoutPanel1.Controls.Add(label1, 1, startRow);
+                tableLayoutPanel1.Refresh();
+
+                Thread.Sleep(500);
             }
         }
     }
